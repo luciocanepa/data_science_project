@@ -1,0 +1,11 @@
+season_id,name,num_players,num_injuries,Sprained_ankle,Sore_knee,Knee_injury,Sore_lower_back,Sore_ankle
+13-14,NBA Season 13-14,482,483,480,1,0,1,1
+14-15,NBA Season 14-15,492,506,493,6,4,0,3
+15-16,NBA Season 15-16,476,485,460,13,2,5,5
+16-17,NBA Season 16-17,486,514,462,31,3,11,7
+17-18,NBA Season 17-18,540,567,525,28,0,9,5
+18-19,NBA Season 18-19,530,589,498,52,10,11,18
+19-20,NBA Season 19-20,529,583,492,57,10,13,11
+20-21,NBA Season 20-21,540,619,494,67,34,10,14
+21-22,NBA Season 21-22,605,702,563,76,13,25,25
+22-23,NBA Season 22-23,521,530,485,22,10,7,6
