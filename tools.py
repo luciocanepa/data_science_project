@@ -1,3 +1,9 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import statsmodels.graphics.api as sma
+import numpy as np
+
+
 def db_to_numeric(db):
     non_numeric_cols = [
         "PLAYER_NAME",
@@ -96,9 +102,53 @@ def plot_multiple_regression_test(test_data, test_predictions):
 
 def plot_partial_regression(res_multiple):
     fig = plt.figure(figsize=(10, 10))
-    sma.graphics.plot_partregress_grid(res_multiple, fig=fig)
+    sma.plot_partregress_grid(res_multiple, fig=fig)
     for ax in fig.get_axes():
         ax.grid(alpha=0.5)
 
     plt.tight_layout()
     plt.show()
+
+
+def multiple_regression_result(
+    res_train, res_test, injuries_multiple, test_data, train_data
+):
+    print("Training Set:")
+    print(res_train.summary())
+    print("\n\nTest Set:")
+    print(res_test.summary())
+
+    print("\n\nTest Set:")
+    y_pred = res_test.predict(test_data)
+    mse = np.mean((test_data["injuries_number"] - y_pred) ** 2)
+    rmse = np.sqrt(mse)
+
+    print(f"R-squared (coefficient of determination): {res_test.rsquared:.4f}")
+    print(f"Mean Squared Error: {mse:.4f}")
+    print(f"Root Mean Squared Error: {rmse:.4f}")
+
+    print(f"Mean of injuries number: {np.mean(injuries_multiple['injuries_number'])}")
+    print(
+        f"Min of injuries number: {np.min(injuries_multiple['injuries_number'])}, Max of injuries number: {np.max(injuries_multiple['injuries_number'])}"
+    )
+    print(
+        f"Median of injuries number: {np.median(injuries_multiple['injuries_number'])}"
+    )
+    print(
+        f"Standard deviation of injuries number: {np.std(injuries_multiple['injuries_number'])}"
+    )
+    print(
+        f"Variance of injuries number: {np.var(injuries_multiple['injuries_number'])}"
+    )
+
+    print("multiple regression plot (training set):")
+    plot_multiple_regression(train_data, res_train)
+
+    print("partial regression plot (training set):")
+    plot_partial_regression(res_train)
+
+    print("multiple regression plot (test set):")
+    plot_multiple_regression_test(test_data, res_test.predict(test_data))
+
+    print("partial regression plot (test set):")
+    plot_partial_regression(res_test)
